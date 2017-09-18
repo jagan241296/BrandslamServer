@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>com.brandslam.servlets.userServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>testimonials</servlet-name>
+        <servlet-class>com.brandslam.servlets.testimonials</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>feedback</servlet-name>
+        <servlet-class>com.brandslam.servlets.feedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>guestFetch</servlet-name>
+        <servlet-class>com.brandslam.servlets.guestFetch</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testimonials</servlet-name>
+        <url-pattern>/testimonials</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>feedback</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>guestFetch</servlet-name>
+        <url-pattern>/guestFetch</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
