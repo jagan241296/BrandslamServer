@@ -10,16 +10,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBHelper {
 
     //JDBC Drivers Details
     public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/brandslam";
+    public static final String DB_URL_AWS = "jdbc:mysql://brandslam.cciah3xt8bos.ap-south-1.rds.amazonaws.com/brandslam";
+    //public static final String DB_URL = "jdbc:mysql://localhost:3306/brandslam";
 
     //MySQL Login Credentials
     public static final String USER = "root";
-    public static final String PASS = "root";
+    public static final String PASS = "brandslam";
 
     static Connection con = null;
 
@@ -31,13 +34,14 @@ public class DBHelper {
             Class.forName(JDBC_DRIVER);
 
             //Creating Connection Object and connecting to MySQL
-            con = DriverManager.getConnection(DB_URL, USER, PASS);
+            con = DriverManager.getConnection(DB_URL_AWS, USER, PASS);
 
             //create a statement object and send it to fire queries
             statement = con.createStatement();
+           
         } catch (Exception e) {
 
-        }
+        }        
         return statement;
     }
 
@@ -49,15 +53,35 @@ public class DBHelper {
             Class.forName(JDBC_DRIVER);
 
             //Creating Connection Object and connecting to MySQL
-            con = DriverManager.getConnection(DB_URL, USER, PASS);
+            con = DriverManager.getConnection(DB_URL_AWS, USER, PASS);
 
             //create a preparedstatement instance and return it
             ps = con.prepareStatement(sqlQuery);
-
+            
         } catch (ClassNotFoundException ex) {
             //Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ps;
+    }
+    
+    public static void close(Statement st)
+    {
+        try {
+            st.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void close(PreparedStatement pst)
+    {
+        try {
+            pst.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

@@ -68,6 +68,8 @@ public class feedback extends HttpServlet {
                     responseJson.put(MacServer.KEY_FEEDBACK_STATUS, 0);
 
                 }
+                //closing connections
+                DBHelper.close(preparedStatement);
             } else {
                 responseStatus = HttpServletResponse.SC_BAD_REQUEST;
             }

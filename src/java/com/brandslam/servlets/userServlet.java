@@ -88,7 +88,8 @@ public class userServlet extends HttpServlet {
                             app_id = rs.getInt(1);
                             System.out.println("ID Assigned: " + app_id);
                         }
-                        preparedStatement.close();
+                        
+                        DBHelper.close(preparedStatement);
                         //insert into response json object
                         responseJson.put(MacServer.KEY_REQUEST_TYPE, requestType);
                         responseJson.put(MacServer.KEY_APP_ID, app_id);
@@ -96,6 +97,7 @@ public class userServlet extends HttpServlet {
                     } else {
                         responseStatus = HttpServletResponse.SC_BAD_REQUEST;
                     }
+                    
                     break;
                 }
             }

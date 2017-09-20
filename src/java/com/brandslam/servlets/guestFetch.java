@@ -99,8 +99,12 @@ public class guestFetch extends HttpServlet {
                         //put object in JSON Array
                         ja.put(recordJson);                        
                     }
+                    rs.close();
+                    DBHelper.close(preparedStatement);
                     responseJson.put(MacServer.KEY_GUEST_ARRAY, ja);   
                     break;
+                    
+                    
                 }
                 
                 
@@ -121,6 +125,8 @@ public class guestFetch extends HttpServlet {
                         //put object in JSON Array
                         ja.put(recordJson);                        
                     }
+                    rs.close();
+                    DBHelper.close(preparedStatement);
                     responseJson.put(MacServer.KEY_GUEST_ARRAY, ja);   
                     break;
                 }

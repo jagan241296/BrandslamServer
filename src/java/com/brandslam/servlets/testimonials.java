@@ -81,6 +81,8 @@ public class testimonials extends HttpServlet {
                         responseJson.put(MacServer.KEY_TESTIMONIAL_STATUS, 0);
 
                     }
+                    
+                    DBHelper.close(preparedStatement);
                     break;
                 }
                 
@@ -104,6 +106,8 @@ public class testimonials extends HttpServlet {
                         //put object in JSON Array
                         ja.put(recordJson);                        
                     }
+                    rs.close();
+                    DBHelper.close(preparedStatement);
                     responseJson.put(MacServer.KEY_TESTIMONIAL_FETCH_ARRAY, ja);   
                 }
                 break;
