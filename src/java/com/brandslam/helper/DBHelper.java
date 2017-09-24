@@ -30,12 +30,14 @@ public class DBHelper {
 
         Statement statement = null;
         try {
+            if(con==null)
+            {
             //Register JDBC Driver
             Class.forName(JDBC_DRIVER);
 
             //Creating Connection Object and connecting to MySQL
             con = DriverManager.getConnection(DB_URL_AWS, USER, PASS);
-
+            }
             //create a statement object and send it to fire queries
             statement = con.createStatement();
            
@@ -49,12 +51,14 @@ public class DBHelper {
 
         PreparedStatement ps = null;
         try {
+            if(con==null)
+            {
             //Register JDBC Driver
             Class.forName(JDBC_DRIVER);
-
+            
             //Creating Connection Object and connecting to MySQL
             con = DriverManager.getConnection(DB_URL_AWS, USER, PASS);
-
+            }
             //create a preparedstatement instance and return it
             ps = con.prepareStatement(sqlQuery);
             
@@ -78,7 +82,11 @@ public class DBHelper {
     {
         try {
             pst.close();
+            if(con!=null)
+            {
             con.close();
+            con=null;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }

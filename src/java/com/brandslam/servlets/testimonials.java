@@ -62,7 +62,7 @@ public class testimonials extends HttpServlet {
                     System.out.println("came inside case 3");
                     //insert record in DB                     
                     String query = "insert into testimonials values(?,?,?,?)";
-                    PreparedStatement preparedStatement = DBHelper.preparedstmtInstance(query);
+                    PreparedStatement preparedStatement = DBHelper.preparedstmtInstance(query);  //conn open
                     preparedStatement.setInt(1, requestJson.getInt(MacServer.KEY_APP_ID));
                     preparedStatement.setString(2, requestJson.getString(MacServer.KEY_TESTIMONIAL_NAME));
                     preparedStatement.setString(4, requestJson.getString(MacServer.KEY_TESTIMONIAL_SUGGESTION));
@@ -112,11 +112,14 @@ public class testimonials extends HttpServlet {
                 }
                 break;
             }
-        } catch (JSONException ex) {
-            Logger.getLogger(testimonials.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(testimonials.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException  | SQLException ex) {
+            try {   
+                responseJson.put("invalid", "");
+            } catch (JSONException ex1) {
+                Logger.getLogger(testimonials.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
+       
 
         System.out.println("Response data " + responseJson.toString());
         //put response in stream

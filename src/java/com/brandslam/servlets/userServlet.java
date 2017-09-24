@@ -72,7 +72,7 @@ public class userServlet extends HttpServlet {
                     preparedStatement.setString(3, requestJson.getString(MacServer.KEY_EMAIL_ID));
                     preparedStatement.setInt(4, gate_id);
                     int insertStatus = preparedStatement.executeUpdate();
-
+                   
                     //check if entry is added
                     if (insertStatus != 0) {
 
@@ -97,7 +97,7 @@ public class userServlet extends HttpServlet {
                     } else {
                         responseStatus = HttpServletResponse.SC_BAD_REQUEST;
                     }
-                    
+                   
                     break;
                 }
             }
